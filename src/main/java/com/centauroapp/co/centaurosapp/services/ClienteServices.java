@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 @Service
 public class ClienteServices {
@@ -42,10 +40,15 @@ public class ClienteServices {
         return client;
     }
 
-    public Client findByIdentification(String id) {
-        return clientRepository.findById(Integer.parseInt(id))
-                .orElseThrow(() -> new EntityNotFoundException("Ocurrio un error consultando el usuario"));
+    public Client findById(int id) {
+            return clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Ocurrio un error consultando el usuario"));
     }
+
+   public  Optional<Client> findByIdentification(String id) {
+        return  clientRepository.findAll().stream().filter(client -> client.getIdentificationClient().equalsIgnoreCase(id))
+                .findFirst();
+    }
+
 
     public List<Client> findAllClient() {
         return clientRepository.findAll();
