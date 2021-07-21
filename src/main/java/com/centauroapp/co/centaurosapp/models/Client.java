@@ -12,11 +12,12 @@ import java.util.Date;
 @Entity
 @Table()
 public class Client {
-    @Id
+
     @Column()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idClient;
 
+    @Id
     @Column()
     private String identificationClient;
 

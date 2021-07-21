@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping({"centauro/user"})
@@ -26,9 +27,21 @@ public class ControllerClient {
     }
 
     @GetMapping("id/{identificationClient}")
-    public <Optional> Client getByIdentification(@PathVariable String identificationClient) {
-        return clienteServices.findByIdentification(identificationClient).orElseThrow(()
-                -> new EntityNotFoundException("Ocurrio un error consultando el usuario por la cc"));
+    public  Client getByIdentification(@PathVariable String identificationClient) {
+        return clienteServices.findByIdentification(identificationClient);
     }
+
+    @GetMapping("/users")
+    public List<Client> getAllUsers() {
+        return clienteServices.findAllClient();
+    }
+
+    @PutMapping("/clients/{identificationClient}")
+    public Client replaceEmployee(@RequestBody Client newEmployee, @PathVariable String identificationClient) {
+       return  clienteServices.replaceClient(newEmployee,identificationClient);
+    }
+
+
+
 
 }
