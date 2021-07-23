@@ -38,6 +38,8 @@ public class ControllerClient {
 
     @PutMapping("/clients/{identificationClient}")
     public Client replaceEmployee(@RequestBody Client newEmployee, @PathVariable String identificationClient) {
+
+
        return  clienteServices.replaceClient(newEmployee,identificationClient);
     }
 

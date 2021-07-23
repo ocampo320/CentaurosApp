@@ -51,6 +51,9 @@ public class Client {
     @Column()
     private String typeContract;
 
+    @Column()
+    private String email;
+
 
 
 }
